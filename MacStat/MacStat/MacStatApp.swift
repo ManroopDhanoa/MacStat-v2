@@ -16,6 +16,7 @@ struct MacStatApp: App {
             
                 .frame(width: 388, height: 430)
             
+            
                 .fixedSize()
                 .onAppear {
                     
