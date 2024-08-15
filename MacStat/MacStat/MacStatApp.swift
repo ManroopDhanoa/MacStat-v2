@@ -14,14 +14,21 @@ struct MacStatApp: App {
         WindowGroup {
             ContentView()
             
+<<<<<<< Updated upstream
                 .frame(width: 388, height: 430)
             
             
+=======
+                .frame(width: 380, height: 430)
+>>>>>>> Stashed changes
                 .fixedSize()
+                
                 .onAppear {
                     
+                    NSApp.appearance = NSAppearance(named: .vibrantDark)
+                
                     if let WindowSize = NSApplication.shared.windows.first {
-                        WindowSize.title = "MacStat"
+                       
                         WindowSize.minSize = NSSize(width: 388, height: 410)
                         WindowSize.maxSize = NSSize(width: 388, height: 410)
                         WindowSize.center()

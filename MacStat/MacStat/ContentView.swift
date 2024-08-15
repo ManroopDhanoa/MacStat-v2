@@ -41,8 +41,8 @@ extension Color {
     
 struct EffectView: NSViewRepresentable  {
     
-    var material: NSVisualEffectView.Material = .contentBackground         //blurry background to cover the whole UI
-    var blendUI: NSVisualEffectView.BlendingMode = .behindWindow           // applying the blurry background to the UI window itself
+    var material: NSVisualEffectView.Material = .fullScreenUI        //blurry background to cover the whole UI
+    var blendUI: NSVisualEffectView.BlendingMode = .behindWindow          // applying the blurry background to the UI window itself
     var allowsVibrancy: Bool = true
     
     
@@ -58,29 +58,33 @@ struct EffectView: NSViewRepresentable  {
         func updateNSView(_ nsView: NSVisualEffectView, context: Context) {    // _ added, no argument label needed
             nsView.material = .contentBackground
             nsView.blendingMode = blendUI
+          
         }
+        
     }
-
+    
 
 struct ContentView: View {
     
     @State private var fanOn = false          //dynamic boolean to change fan button color when fan is on
- 
+    
     
 var body: some View {
-        
+    
         ZStack{
-            
-            EffectView(material: NSVisualEffectView.Material.contentBackground, blendUI: NSVisualEffectView.BlendingMode.behindWindow)
-                .frame(width: 388, height: 430)
-            
            
-                
+            
+            EffectView(material: NSVisualEffectView.Material.fullScreenUI, blendUI: NSVisualEffectView.BlendingMode.behindWindow,allowsVibrancy: true)
+                .frame(width: 380, height: 430)
+             
+               
+            
             VStack(alignment: .leading, spacing: 50) {
                 Text("MacStat")
                     .offset(x:-135, y: -184)
-                    .font(.system(size: 17.7, weight: .regular, design: .default))
+                    .font(.system(size: 17.7, weight: .semibold, design: .default))
                     .foregroundColor(Color(hex: "D7D7D7").opacity(0.8))
+                   
             }
             
             Divider()
@@ -138,16 +142,31 @@ var body: some View {
                 Button(action: {
                     
                     fanOn.toggle()
-                  
+                    
                     
                 }) {
-                    Image(systemName: "fanblades")
+                
+                if fanOn {
+                    
+                    Image(systemName: "fanblades.fill")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(height: 26)
                     .offset(x: 4, y: -2)  //fanblade image
                     .foregroundStyle(fanOn ? Color.green: Color(hex: "D7D7D7").opacity(0.8))
               
+                        
+                       
+                        
+                    
+                } else {
+                    Image(systemName: "fanblades")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(height: 26)
+                        .offset(x: 4, y: -2)  //fanblade image
+                        .foregroundStyle(fanOn ? Color.green: Color(hex: "D7D7D7").opacity(0.8))
+                  }
                 }
                 .offset(x:151, y: 198)  //button container
                 .buttonStyle(PlainButtonStyle())
@@ -155,13 +174,15 @@ var body: some View {
                
                 HStack {
                     Text("Fan spin")
-                        .offset(x: 97,y: 168)
+                        .offset(x: 97,y: 167)
                         .font(.system(size: 15.17, weight: .light, design: .default ))
                         .foregroundColor(Color(hex: "D7D7D7").opacity(0.8))
                 }
             }
         }
+        .background(Color(hex: "373737").opacity(1.0))
     }
+       
 }
 
     
