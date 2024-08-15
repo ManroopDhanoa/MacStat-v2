@@ -14,13 +14,7 @@ struct MacStatApp: App {
         WindowGroup {
             ContentView()
             
-<<<<<<< Updated upstream
-                .frame(width: 388, height: 430)
-            
-            
-=======
                 .frame(width: 380, height: 430)
->>>>>>> Stashed changes
                 .fixedSize()
                 
                 .onAppear {
