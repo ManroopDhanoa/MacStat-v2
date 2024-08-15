@@ -9,7 +9,6 @@ import SwiftUI
 import AppKit
 
 
-
 extension Color {
     init(hex: String) {
         let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
@@ -38,13 +37,12 @@ extension Color {
 }
 
 
-    
+
 struct EffectView: NSViewRepresentable  {
     
     var material: NSVisualEffectView.Material = .fullScreenUI        //blurry background to cover the whole UI
     var blendUI: NSVisualEffectView.BlendingMode = .behindWindow          // applying the blurry background to the UI window itself
     var allowsVibrancy: Bool = true
-    
     
     func makeNSView(context: Context) -> NSVisualEffectView {
         let blurryEffectView = NSVisualEffectView()
@@ -55,138 +53,108 @@ struct EffectView: NSViewRepresentable  {
         return NSVisualEffectView()
     }
         
-        func updateNSView(_ nsView: NSVisualEffectView, context: Context) {    // _ added, no argument label needed
-            nsView.material = .contentBackground
-            nsView.blendingMode = blendUI
-          
-        }
-        
+    func updateNSView(_ nsView: NSVisualEffectView, context: Context) {    // _ added, no argument label needed
+        nsView.material = .contentBackground
+        nsView.blendingMode = blendUI
     }
-    
+}
 
 struct ContentView: View {
     
     @State private var fanOn = false          //dynamic boolean to change fan button color when fan is on
+    @State private var fanRotation: Double = 0
     
-    
-var body: some View {
-    
-        ZStack{
-           
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("MacStat")
+                .font(.system(size: 17.7, weight: .regular, design: .default))
+            Divider()
+                .frame(maxWidth: .infinity)
+                .opacity(2.0)
             
-            EffectView(material: NSVisualEffectView.Material.fullScreenUI, blendUI: NSVisualEffectView.BlendingMode.behindWindow,allowsVibrancy: true)
-                .frame(width: 380, height: 430)
-             
-               
+            Spacer()
             
-            VStack(alignment: .leading, spacing: 50) {
-                Text("MacStat")
-                    .offset(x:-135, y: -184)
-                    .font(.system(size: 17.7, weight: .semibold, design: .default))
-                    .foregroundColor(Color(hex: "D7D7D7").opacity(0.8))
-                   
+            HStack {
+                Group {
+                    Image(systemName: "thermometer.medium")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 30, height: 30)
+                        .opacity(0.8)
+                }
+                .frame(width: 60)
+
+                Text("CPU Temperature :")
+                    .font(.system(size: 15.17, weight: .regular, design: .default ))
+                    .opacity(0.8)
             }
             
             Divider()
-                .offset(x:1, y: -160)
-             .frame(width: 340)
-             .foregroundColor(Color(hex: "D7D7D7").opacity(2.0))
+                .frame(maxWidth: .infinity)
+                .opacity(2.0)
+                .padding(.vertical, 4)
             
-            //add Mac device/chip type detection here later - under top Divider
-            
-            VStack {
-               Image(systemName: "thermometer.medium")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 16.06, height: 29.29)
-                    .offset(x:-147, y: -15)
-                    .foregroundColor(Color(hex: "D7D7D7").opacity(0.8))
-                
-                HStack {
-                    Text("CPU Temperature :")
-                        .offset(x:-45, y: -45)
-                        .font(.system(size: 15.17, weight: .regular, design: .default ))
-                        .foregroundColor(Color(hex: "D7D7D7").opacity(0.8))
-                }
-    
-            }
-              
-               Divider()
-            
-                .frame(width: 340)
-                .foregroundColor(Color(hex: "D7D7D7").opacity(2.0))
-                
-            VStack {
+            HStack {
+                Group {
                     Image(systemName: "cpu.fill")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 29.07, height: 28.93)
-                    .offset(x: -148,y: 40)
-                    .foregroundColor(Color(hex: "D7D7D7").opacity(0.8))
-                
-                HStack {
-                    Text("Memory Usage :")
-                        .offset(x: -53, y: 11)
-                        .font(.system(size: 15.17, weight: .regular, design: .default ))
-                        .foregroundColor(Color(hex: "D7D7D7").opacity(0.8))
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 30, height: 30)
+                        .opacity(0.8)
                 }
-            }
-           
-            Divider()
-             .offset(x:1,y: 150)
-             .frame(width: 340)
-             .foregroundColor(Color(hex: "D7D7D7").opacity(1.3))
-          
-            VStack {
-              
-                Button(action: {
-                    
-                    fanOn.toggle()
-                    
-                    
-                }) {
+                .frame(width: 60)
+
                 
-                if fanOn {
-                    
-                    Image(systemName: "fanblades.fill")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(height: 26)
-                    .offset(x: 4, y: -2)  //fanblade image
-                    .foregroundStyle(fanOn ? Color.green: Color(hex: "D7D7D7").opacity(0.8))
-              
-                        
-                       
-                        
-                    
-                } else {
-                    Image(systemName: "fanblades")
+                Text("Memory Usage :")
+                    .font(.system(size: 15.17, weight: .regular, design: .default))
+                    .opacity(0.8)
+            }
+            
+            Spacer()
+            
+            Divider()
+                .frame(maxWidth: .infinity)
+                .opacity(1.3)
+            
+            HStack {
+                Spacer()
+                Text("Fan spin")
+                    .font(.system(size: 15.17, weight: .light, design: .default))
+                    .opacity(0.8)
+                
+                Button(action: {
+                    fanOn.toggle()
+                    if fanOn {
+                        withAnimation(.linear(duration: 0.3).repeatForever(autoreverses: false)) {
+                            fanRotation = 90
+                        }
+                    } else {
+                        withAnimation {
+                            fanRotation = 0
+                        }
+                    }
+                }) {
+                    Image(systemName: fanOn ? "fanblades.fill" : "fanblades")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(height: 26)
-                        .offset(x: 4, y: -2)  //fanblade image
                         .foregroundStyle(fanOn ? Color.green: Color(hex: "D7D7D7").opacity(0.8))
-                  }
+                        .rotationEffect(Angle(degrees: fanRotation))
                 }
-                .offset(x:151, y: 198)  //button container
-                .buttonStyle(PlainButtonStyle())
-                
-               
-                HStack {
-                    Text("Fan spin")
-                        .offset(x: 97,y: 167)
-                        .font(.system(size: 15.17, weight: .light, design: .default ))
-                        .foregroundColor(Color(hex: "D7D7D7").opacity(0.8))
-                }
+                .buttonStyle(.plain)
             }
+            .padding()
         }
-        .background(Color(hex: "373737").opacity(1.0))
+        .foregroundColor(Color(hex: "D7D7D7"))
+        .padding()
+        .frame(width: 388, height: 430)
+        .background(EffectView(material: NSVisualEffectView.Material.contentBackground, blendUI: NSVisualEffectView.BlendingMode.behindWindow))
+        
+        //add Mac device/chip type detection here later - under top Divider
     }
-       
 }
 
-    
-    #Preview {
-        ContentView()
-    }
+#Preview {
+    ContentView()
+}
 
