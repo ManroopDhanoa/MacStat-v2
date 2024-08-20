@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B29093FE2C6863FB00B94CCF /* assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B29093FD2C6863FB00B94CCF /* assets.xcassets */; };
+		B29094022C6E4B5400B94CCF /* systemInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29094012C6E4B5400B94CCF /* systemInfo.swift */; };
 		B2DEA2472C66FCA3001028B7 /* MacStatApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2DEA2462C66FCA3001028B7 /* MacStatApp.swift */; };
 		B2DEA2492C66FCA3001028B7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2DEA2482C66FCA3001028B7 /* ContentView.swift */; };
 		B2DEA24E2C66FCA4001028B7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2DEA24D2C66FCA4001028B7 /* Preview Assets.xcassets */; };
@@ -35,6 +36,7 @@
 
 /* Begin PBXFileReference section */
 		B29093FD2C6863FB00B94CCF /* assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = assets.xcassets; sourceTree = "<group>"; };
+		B29094012C6E4B5400B94CCF /* systemInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = systemInfo.swift; sourceTree = "<group>"; };
 		B2DEA2432C66FCA3001028B7 /* MacStat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacStat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2DEA2462C66FCA3001028B7 /* MacStatApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacStatApp.swift; sourceTree = "<group>"; };
 		B2DEA2482C66FCA3001028B7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				B2DEA2482C66FCA3001028B7 /* ContentView.swift */,
+				B29094012C6E4B5400B94CCF /* systemInfo.swift */,
 				B2DEA2462C66FCA3001028B7 /* MacStatApp.swift */,
 				B2DEA24F2C66FCA4001028B7 /* MacStat.entitlements */,
 				B2DEA24C2C66FCA4001028B7 /* Preview Content */,
@@ -259,6 +262,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B29094022C6E4B5400B94CCF /* systemInfo.swift in Sources */,
 				B2DEA2492C66FCA3001028B7 /* ContentView.swift in Sources */,
 				B2DEA2472C66FCA3001028B7 /* MacStatApp.swift in Sources */,
 			);
@@ -425,7 +429,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MacStat/Preview Content\"";
-				DEVELOPMENT_TEAM = L3UD2T89A9;
+				DEVELOPMENT_TEAM = L96XRPBK46;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -452,7 +456,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MacStat/Preview Content\"";
-				DEVELOPMENT_TEAM = L3UD2T89A9;
+				DEVELOPMENT_TEAM = L96XRPBK46;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;

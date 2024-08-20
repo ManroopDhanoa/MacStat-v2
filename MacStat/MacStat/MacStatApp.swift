@@ -14,10 +14,19 @@ struct MacStatApp: App {
         WindowGroup {
             ContentView()
             
+
+
+
+
+
                 .frame(width: 380, height: 430)
                 .fixedSize()
                 
                 .onAppear {
+                    
+                  
+                    let chip = systemInfo()
+                    print(chip)
                     
                     NSApp.appearance = NSAppearance(named: .vibrantDark)
                 
@@ -40,4 +49,5 @@ struct MacStatApp: App {
         
         
     }
+    
 }
